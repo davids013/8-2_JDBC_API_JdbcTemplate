@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet  author="vshvedko"  id="003-1/1">
+        <insert tableName="CUSTOMERS">
+            <column name="name" value="Ivan"/>
+            <column name="surname" value="Minaev"/>
+            <column name="age" value="37"/>
+        </insert>
+    </changeSet>
+    <changeSet  author="vshvedko"  id="003-1/2">
+        <insert tableName="CUSTOMERS">
+            <column name="name" value="Feodor"/>
+            <column name="surname" value="Lykov"/>
+            <column name="age" value="51"/>
+        </insert>
+    </changeSet>
+    <changeSet  author="vshvedko"  id="003-1/3">
+        <insert tableName="CUSTOMERS">
+            <column name="name" value="Nikolay"/>
+            <column name="surname" value="Kolpakov"/>
+            <column name="age" value="24"/>
+        </insert>
+    </changeSet>
+    <changeSet  author="vshvedko"  id="003-2/1">
+        <insert tableName="ORDERS">
+            <column name="customer_id" value="1"/>
+            <column name="product_name" value="Milk"/>
+            <column name="amount" value="60"/>
+        </insert>
+    </changeSet>
+    <changeSet  author="vshvedko"  id="003-2/2">
+        <insert tableName="ORDERS">
+            <column name="customer_id" value="2"/>
+            <column name="product_name" value="Apples"/>
+            <column name="amount" value="90"/>
+        </insert>
+    </changeSet>
+    <changeSet  author="vshvedko"  id="003-2/3">
+        <insert tableName="ORDERS">
+            <column name="customer_id" value="3"/>
+            <column name="product_name" value="Sausage"/>
+            <column name="amount" value="130"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: migrations/001-creating_customers.sql
+      relativeToChangelogFile:  true
+  - include:
+      file: migrations/002-creating_orders.sql
+      relativeToChangelogFile:  true
+  - include:
+      file: migrations/003-modifying.xml
+      relativeToChangelogFile:  true
