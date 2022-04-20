@@ -41,3 +41,15 @@ private static String read(String scriptFileName) {
 1. Вам надо переписать логику работы задания `DAO слой` так, чтобы ваше приложение работало с миграциями. Не важно выберете ли вы Flyway или Liquibase.
 
 2. Написанные код выложите в отдельный репозиторий на гитхабе и прикрепите ссылку на него в домашнем задании.
+
+
+# Задача Две таблицы с Hibernate
+
+## Описание
+Перепишем приложение из [задания по JDBC](https://github.com/netology-code/jd-homeworks/blob/master/jdbc/task1/README.md) на Hibernate.
+
+1. Вам необходимо будет написать две `Entity`, соответствующие двум таблицам из задания. Учтите, что вам надо будет верно выбрать логику отношений этих Entity: `OneToOne`, `OneToMany`, `ManyToOne`, `ManyToMany`
+
+2. Перепишите репозиторий, чтобы он теперь работал с `EntityManager`, а не через `NamedParameterJdbcTemplate`.
+
+3. Написанные код выложите в тот же репозиторий, что и задача [DAO слой](https://github.com/netology-code/jd-homeworks/blob/master/jdbc/task1/README.md) на гитхабe, только создайте под нее другую ветку `hibernate` и прикрепите ссылку на нее в домашнем задании.
