@@ -25,10 +25,8 @@ public class ProductRepository {
 
     @Transactional
     public String getProductName(String name) {
-        if (sqlRequest == null) {
+        if (sqlRequest == null)
             sqlRequest = read(sqlScriptFile);
-            addPairFor(name);
-        }
         final String hqlRequest = sqlRequest
                 .replace("?", "'" + name + "'")
                 .replace(";", "")
@@ -38,13 +36,6 @@ public class ProductRepository {
                 .replace("ORDERS", "Orders");
         final Query query = entityManager.createQuery(hqlRequest);
         return query.getSingleResult().toString();
-    }
-
-    private void addPairFor(String name) {
-        final Customers c = new Customers(name, "Petrov", 20, "+7-999-...");
-        final Orders o = new Orders(c, "Milk", 60);
-        entityManager.persist(c);
-        entityManager.persist(o);
     }
 
     private String read(String scriptFileName) {
