@@ -1,18 +1,18 @@
 package ru.netology.jdbcapi_jdbctemplate.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import ru.netology.jdbcapi_jdbctemplate.db.entities.Customers;
+import ru.netology.jdbcapi_jdbctemplate.db.entities.Orders;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
@@ -20,21 +20,22 @@ public class ProductRepository {
     private final String sqlScriptFile = "select_product_by_customer_id.sql";
     private String sqlRequest;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
+    @Transactional
     public String getProductName(String name) {
         if (sqlRequest == null)
             sqlRequest = read(sqlScriptFile);
-        return jdbcTemplate.queryForObject(sqlRequest,
-                (resultSet, i) -> resultSet.getString("product_name"), name);
-//        Map<String, String> map = new HashMap<>();
-//        map.put("name", name);
-//        return namedParameterJdbcTemplate.queryForObject(sqlRequest, map,
-//                (resultSet, i) -> resultSet.getString("product_name"));
+        final String hqlRequest = sqlRequest
+                .replace("?", "'" + name + "'")
+                .replace(";", "")
+                .replace("product_name", "productName")
+                .replace("customer_id", "customerId")
+                .replace("CUSTOMERS", "Customers")
+                .replace("ORDERS", "Orders");
+        final Query query = entityManager.createQuery(hqlRequest);
+        return query.getSingleResult().toString();
     }
 
     private String read(String scriptFileName) {
